@@ -12,17 +12,29 @@
 
 
 <div class="container" style="margin: auto;padding:20px 0;align-items: center;justify-content: space-around;">
-  <h5>Files</h5>
+  
   <div class="bs-docs-section">
     <form id="uploadForm" enctype="multipart/form-data" method="POST">
       <fieldset>
         <div class="form-group">
           <label for="inputfile">File Upload</label>
-          <input type="file" name="test_file" class="form-control-file" id="inputfile" aria-describedby="fileHelp">
-          <button type="button" onClick="uploadFile()" class="btn btn-primary btn-sm">Upload</button>
+          <input type="file" name="test_file" class="form-control-file" id="inputfile" aria-describedby="fileHelp">          
         </div>
       </fieldset>
+
+      <p>
+        <button type="button" onClick="uploadFile()" class="btn btn-primary btn-sm">Upload to Local</button>
+        <button type="button"  class="btn btn-primary btn-sm">Upload to Google</button>
+        <button type="button"  class="btn btn-primary disabled btn-sm">Upload to Azure</button>
+        <button type="button"class="btn btn-primary disabled btn-sm">Upload to AWS</button>
+      </p>
     </form>
+  </div>
+</div>
+
+<div  class="container" style="margin: auto;padding:20px 0;align-items: center;justify-content: space-around;">
+  <div class="bs-docs-section">
+    <h5>Files</h5>
     <ul id='ul-container' class="list-group">
 
     </ul>
@@ -46,7 +58,7 @@
   .catch(e => {console.log(e)})
 
   function uploadFile() {
-    debugger
+    
     const form = document.getElementById('uploadForm');
     const formData = new FormData(form);
     fetch('files',{
@@ -54,10 +66,16 @@
       body: formData
     }).then(response => response.json())
     .then((data)=>{
-      console.log(data);
-      alert(data.message);
-      window.location = '/';
+      if(data.success) {
+        alert(data.message);
+        window.location = '/';
+      }else {
+        alert(data.error)
+      }      
     })
+    .catch(e => {
+      alert(e.message)
+    });
   }
 
   function deleteFile(privateKey) {

@@ -70,9 +70,15 @@ app.post('/files', upload.single('test_file'), (req, res, next) => {
       publicKey,
     });
   } catch (e) {
-    console.log(e);
+    res.status(400).send(e);
   }
 });
+
+function errorHandler (err, req, res, next) {
+  res.status(err.httpStatusCode).send({ success:false, error: err.message })
+}
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
