@@ -1,10 +1,1 @@
-{
-  "files": [
-    {
-      "id": "b52bedd024f72467e3ec95ea5c071490",
-      "publicKey": "11fc6",
-      "timestamp": 1588261033009,
-      "ipAddress": "::1"
-    }
-  ]
-}
+{"files":[{"id":"66d873045aba2e1fcae0c8b80ba461a6","publicKey":"53727","timestamp":1588310839209,"ipAddress":"::1","path":"uploads/66d873045aba2e1fcae0c8b80ba461a6","mimetype":"application/pdf","originalName":"CusdecFinalSAD-I79B2000048.pdf"}]}

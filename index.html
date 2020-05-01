@@ -11,39 +11,69 @@
 
 
 
-<div class="container" style="margin: auto;padding: 10px 0;align-items: center;justify-content: space-around;">
+<div class="container" style="margin: auto;padding:20px 0;align-items: center;justify-content: space-around;">
   <h5>Files</h5>
   <div class="bs-docs-section">
-    <p>
-      <button type="button" class="btn btn-primary ">Add File</button>
-    </p>
-    <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        Cras justo odio
-        <span class="badge badge-primary badge-pill">14</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        Dapibus ac facilisis in
-        <span class="badge badge-primary badge-pill">2</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        Morbi leo risus
-        <span class="badge badge-primary badge-pill">1</span>
-      </li>
-    </ul>
-
-    <!--  SINGLE FILE -->
-    <form action="/files" enctype="multipart/form-data" method="POST">
-      <input type="file" name="test_file" />
-      <input type="submit" value="Upload a file" />
+    <form id="uploadForm" enctype="multipart/form-data" method="POST">
+      <fieldset>
+        <div class="form-group">
+          <label for="inputfile">File Upload</label>
+          <input type="file" name="test_file" class="form-control-file" id="inputfile" aria-describedby="fileHelp">
+          <button type="button" onClick="uploadFile()" class="btn btn-primary btn-sm">Upload</button>
+        </div>
+      </fieldset>
     </form>
+    <ul id='ul-container' class="list-group">
+
+    </ul>
   </div>
-  
-  
 </div>
 
 
 
 </body>
+
+<script type="text/javascript">
+  fetch('files').then(response => response.json())
+  .then((data)=>  {
+    const ul = document.getElementById('ul-container');
+    data.forEach(element => {
+      ul.innerHTML += `<li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="/files/${element.publicKey}">${element.originalName}</a><button onClick="deleteFile('${element.id}')" type="button" class="btn btn-danger btn-sm">Delete</button>
+        </li>`;
+    });      
+  })
+  .catch(e => {console.log(e)})
+
+  function uploadFile() {
+    debugger
+    const form = document.getElementById('uploadForm');
+    const formData = new FormData(form);
+    fetch('files',{
+      method: 'post',
+      body: formData
+    }).then(response => response.json())
+    .then((data)=>{
+      console.log(data);
+      alert(data.message);
+      window.location = '/';
+    })
+  }
+
+  function deleteFile(privateKey) {
+
+    const del = confirm('Are you sure?');
+    if(del) {
+      fetch('files/' + privateKey, {method: 'delete'}).then(response => response.json())
+      .then((data)=>{
+        alert(data.message);
+        window.location = '/';
+      })
+    .catch(e => console.log(e));
+    }
+
+    
+  }
+</script>
 
 </html>
