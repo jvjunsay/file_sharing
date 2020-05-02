@@ -51,11 +51,34 @@
     const ul = document.getElementById('ul-container');
     data.forEach(element => {
       ul.innerHTML += `<li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="/files/${element.publicKey}">${element.originalName}</a><button onClick="deleteFile('${element.id}')" type="button" class="btn btn-danger btn-sm">Delete</button>
+        <a href="javascript:void(0)" onClick="downloadFile('${element.publicKey}')">${element.originalName}</a><button onClick="deleteFile('${element.id}')" type="button" class="btn btn-danger btn-sm">Delete</button>
         </li>`;
     });      
   })
   .catch(e => {console.log(e)})
+
+  function downloadFile(publicKey) {
+    fetch('files/' + publicKey, {method: 'get'}).then(response => {
+      if(response.status===400) {
+        return response.json();
+      }else {
+        return response.blob();
+      }
+    })
+      .then((data)=>{
+        if(data.constructor.name === 'Blob'){
+          const url = window.URL.createObjectURL(data);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = publicKey;
+          document.body.appendChild(a);
+          a.click();    
+          a.remove(); 
+        } else {
+          alert(data.error);
+        }
+      });
+  }
 
   function uploadFile() {
     
