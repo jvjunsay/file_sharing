@@ -34,7 +34,7 @@ describe('POST', function(){
  * Upload File first to get public key
  * Continue testing the download route
  */
-describe('GET', function(){
+describe('POST', function(){
     it('file download should have success code 200', function(done){
         req.post('/files')
         .field({'storage': 'local'})
@@ -59,7 +59,7 @@ describe('GET', function(){
  * Upload File first to get private key
  * Continue testing the delete route
  */
-describe('GET', function(){
+describe('POST', function(){
     it('file delete should have success code 200', function(done){
         req.post('/files')    
         .field({'storage': 'local'})

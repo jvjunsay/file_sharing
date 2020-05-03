@@ -1,1 +1,8 @@
-{"files":[{"id":"93e856546ddc365b4aecf247cc8e2ea8","publicKey":"8d3b5","timestamp":1588501760044,"ipAddress":"::1","path":"uploads/93e856546ddc365b4aecf247cc8e2ea8","mimetype":"application/pdf","originalName":"COMPUTATION CTP.21.20.pdf","storage":"local"},{"id":"934d74ce2725807753aa88802c46cedc","publicKey":"f18f4","timestamp":1588503562702,"ipAddress":"::ffff:127.0.0.1","path":"uploads/934d74ce2725807753aa88802c46cedc","mimetype":"application/pdf","originalName":"test_file.pdf","storage":"local"},{"id":"0df8ac13a56ffd4b7cc2ab8631045b54","publicKey":"9d569","timestamp":1588503562712,"ipAddress":"::ffff:127.0.0.1","path":"uploads/0df8ac13a56ffd4b7cc2ab8631045b54","mimetype":"application/pdf","originalName":"test_file.pdf","storage":"local"},{"id":"d218f9f3ab19808bafa35df42c9c4a02","publicKey":"39e9e","timestamp":1588503562727,"ipAddress":"::ffff:127.0.0.1","path":"uploads/d218f9f3ab19808bafa35df42c9c4a02","mimetype":"application/pdf","originalName":"test_file.pdf","storage":"local"}],"downloads":[{"timestamp":1588503562715,"ipAddress":"::ffff:127.0.0.1"}]}
+{
+  "files": [
+    
+  ],
+  "downloads": [
+     
+  ]
+}
