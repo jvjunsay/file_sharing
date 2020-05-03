@@ -6,6 +6,7 @@ const req = require('supertest-as-promised').agent(app);
 describe('GET', function(){
     it('files route should have success code 200', function(done){
         req.get('/files')
+        .send({'storage': 'local'})
         .expect(200)
         .end(function(err,res){
             if(err) done(err);
@@ -17,7 +18,8 @@ describe('GET', function(){
 // Test for uploading file
 describe('POST', function(){
     it('file upload should have success code 200', function(done){
-        req.post('/files')
+        req.post('/files')        
+        .field({'storage': 'local'})
         .attach('test_file', __dirname + '/test_file.pdf')
         .expect(200)
         .end(function(err,res){
@@ -35,6 +37,7 @@ describe('POST', function(){
 describe('GET', function(){
     it('file download should have success code 200', function(done){
         req.post('/files')
+        .field({'storage': 'local'})
         .attach('test_file', __dirname + '/test_file.pdf')
         .expect(200)
         .end(function(err,res){
@@ -58,7 +61,8 @@ describe('GET', function(){
  */
 describe('GET', function(){
     it('file delete should have success code 200', function(done){
-        req.post('/files')
+        req.post('/files')    
+        .field({'storage': 'local'})
         .attach('test_file', __dirname + '/test_file.pdf')
         .expect(200)
         .end(function(err,res){

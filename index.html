@@ -23,10 +23,11 @@
       </fieldset>
 
       <p>
-        <button type="button" onClick="uploadFile()" class="btn btn-primary btn-sm">Upload to Local</button>
-        <button type="button"  class="btn btn-primary btn-sm">Upload to Google</button>
+        <button type="button" onClick="uploadFile('local')" class="btn btn-primary btn-sm">Upload to Local</button>
+        <button type="button" onClick="uploadFile('s3')" class="btn btn-primary  btn-sm">Upload to AWS</button>
+        <button type="button"  class="btn btn-primary disabled btn-sm">Upload to Google</button>
         <button type="button"  class="btn btn-primary disabled btn-sm">Upload to Azure</button>
-        <button type="button"class="btn btn-primary disabled btn-sm">Upload to AWS</button>
+        
       </p>
     </form>
   </div>
@@ -80,10 +81,11 @@
       });
   }
 
-  function uploadFile() {
+  function uploadFile(storage) {
     
     const form = document.getElementById('uploadForm');
     const formData = new FormData(form);
+    formData.append('storage', storage)
     fetch('files',{
       method: 'post',
       body: formData

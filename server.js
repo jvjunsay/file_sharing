@@ -7,27 +7,23 @@ const cors = require('cors');
 const router = require('./router');
 require('dotenv').config({ path: __dirname + '/.env' });
 
-//CREATE EXPRESS APP
+//Create Express App
 const app = express();
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//ROUTES WILL GO HERE
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-
-
+//Routes Will Go Here
 router(app, cron);
 
-//HANDLE DEFAULT ERRORS
+//Handle Default Errors
 function errorHandler(err, req, res, next) {
   res.status(err.httpStatusCode).send({ success: false, error: err.message });
 }
 
 app.use(errorHandler);
 
+// Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server listening to: ${PORT}`);
