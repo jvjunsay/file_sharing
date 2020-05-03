@@ -1,1 +1,18 @@
-{"files":[{"id":"340d4c56ffbd41461eee2eadda790f9c","publicKey":"0ed1a","timestamp":1588504302862,"ipAddress":"::1","path":"uploads/340d4c56ffbd41461eee2eadda790f9c","mimetype":"application/pdf","originalName":"COMPUTATION CTP.21.20.pdf","storage":"s3"}],"downloads":[{"timestamp":1588504323782,"ipAddress":"::1"}]}
+{
+  "files": [
+    {
+      "id": "6c139ee9baa930d4bc9f4033ffaf368b",
+      "publicKey": "6372e",
+      "timestamp": 1588506861014,
+      "ipAddress": "::1",
+      "path": "uploads/6c139ee9baa930d4bc9f4033ffaf368b",
+      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "originalName": "COMPUTATION.M.31.20.xlsx",
+      "storage": "s3"
+    }
+  ],
+  "downloads": [
+    { "timestamp": 1588504323782, "ipAddress": "::1" },
+    { "timestamp": 1588506864370, "ipAddress": "::1" }
+  ]
+}
