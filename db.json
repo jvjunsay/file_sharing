@@ -1,8 +1,1 @@
-{
-  "files": [
-    
-  ],
-  "downloads": [
-     
-  ]
-}
+{"files":[{"id":"340d4c56ffbd41461eee2eadda790f9c","publicKey":"0ed1a","timestamp":1588504302862,"ipAddress":"::1","path":"uploads/340d4c56ffbd41461eee2eadda790f9c","mimetype":"application/pdf","originalName":"COMPUTATION CTP.21.20.pdf","storage":"s3"}],"downloads":[{"timestamp":1588504323782,"ipAddress":"::1"}]}
