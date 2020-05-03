@@ -8,39 +8,36 @@
 </head>
 
 <body>
+  <div class="container" style="margin: auto;padding:20px 0;align-items: center;justify-content: space-around;">
 
+    <div class="bs-docs-section">
+      <form id="uploadForm" enctype="multipart/form-data" method="POST">
+        <fieldset>
+          <div class="form-group">
+            <label for="inputfile">File Upload</label>
+            <input type="file" name="test_file" class="form-control-file" id="inputfile" aria-describedby="fileHelp">
+          </div>
+        </fieldset>
 
+        <p>
+          <button type="button" onClick="uploadFile('local')" class="btn btn-primary btn-sm">Upload to Local</button>
+          <button type="button" onClick="uploadFile('s3')" class="btn btn-primary  btn-sm">Upload to AWS</button>
+          <button type="button" class="btn btn-primary disabled btn-sm">Upload to Google</button>
+          <button type="button" class="btn btn-primary disabled btn-sm">Upload to Azure</button>
 
-<div class="container" style="margin: auto;padding:20px 0;align-items: center;justify-content: space-around;">
-  
-  <div class="bs-docs-section">
-    <form id="uploadForm" enctype="multipart/form-data" method="POST">
-      <fieldset>
-        <div class="form-group">
-          <label for="inputfile">File Upload</label>
-          <input type="file" name="test_file" class="form-control-file" id="inputfile" aria-describedby="fileHelp">          
-        </div>
-      </fieldset>
-
-      <p>
-        <button type="button" onClick="uploadFile('local')" class="btn btn-primary btn-sm">Upload to Local</button>
-        <button type="button" onClick="uploadFile('s3')" class="btn btn-primary  btn-sm">Upload to AWS</button>
-        <button type="button"  class="btn btn-primary disabled btn-sm">Upload to Google</button>
-        <button type="button"  class="btn btn-primary disabled btn-sm">Upload to Azure</button>
-        
-      </p>
-    </form>
+        </p>
+      </form>
+    </div>
   </div>
-</div>
 
-<div  class="container" style="margin: auto;padding:20px 0;align-items: center;justify-content: space-around;">
-  <div class="bs-docs-section">
-    <h5>Files</h5>
-    <ul id='ul-container' class="list-group">
+  <div class="container" style="margin: auto;padding:20px 0;align-items: center;justify-content: space-around;">
+    <div class="bs-docs-section">
+      <h5>Files</h5>
+      <ul id='ul-container' class="list-group">
 
-    </ul>
+      </ul>
+    </div>
   </div>
-</div>
 
 
 
@@ -48,33 +45,33 @@
 
 <script type="text/javascript">
   fetch('files').then(response => response.json())
-  .then((data)=>  {
-    const ul = document.getElementById('ul-container');
-    data.forEach(element => {
-      ul.innerHTML += `<li class="list-group-item d-flex justify-content-between align-items-center">
+    .then((data) => {
+      const ul = document.getElementById('ul-container');
+      data.forEach(element => {
+        ul.innerHTML += `<li class="list-group-item d-flex justify-content-between align-items-center">
         <a href="javascript:void(0)" onClick="downloadFile('${element.publicKey}')">${element.originalName}</a><button onClick="deleteFile('${element.id}')" type="button" class="btn btn-danger btn-sm">Delete</button>
         </li>`;
-    });      
-  })
-  .catch(e => {console.log(e)})
+      });
+    })
+    .catch(e => { console.log(e) })
 
   function downloadFile(publicKey) {
-    fetch('files/' + publicKey, {method: 'get'}).then(response => {
-      if(response.status===400) {
+    fetch('files/' + publicKey, { method: 'get' }).then(response => {
+      if (response.status === 400) {
         return response.json();
-      }else {
+      } else {
         return response.blob();
       }
     })
-      .then((data)=>{
-        if(data.constructor.name === 'Blob'){
+      .then((data) => {
+        if (data.constructor.name === 'Blob') {
           const url = window.URL.createObjectURL(data);
           const a = document.createElement('a');
           a.href = url;
           a.download = publicKey;
           document.body.appendChild(a);
-          a.click();    
-          a.remove(); 
+          a.click();
+          a.remove();
         } else {
           alert(data.error);
         }
@@ -82,40 +79,40 @@
   }
 
   function uploadFile(storage) {
-    
+
     const form = document.getElementById('uploadForm');
     const formData = new FormData(form);
     formData.append('storage', storage)
-    fetch('files',{
+    fetch('files', {
       method: 'post',
       body: formData
     }).then(response => response.json())
-    .then((data)=>{
-      if(data.success) {
-        alert(data.message);
-        window.location = '/';
-      }else {
-        alert(data.error)
-      }      
-    })
-    .catch(e => {
-      alert(e.message)
-    });
+      .then((data) => {
+        if (data.success) {
+          alert(data.message);
+          window.location = '/';
+        } else {
+          alert(data.error)
+        }
+      })
+      .catch(e => {
+        alert(e.message)
+      });
   }
 
   function deleteFile(privateKey) {
 
     const del = confirm('Are you sure?');
-    if(del) {
-      fetch('files/' + privateKey, {method: 'delete'}).then(response => response.json())
-      .then((data)=>{
-        alert(data.message);
-        window.location = '/';
-      })
-    .catch(e => console.log(e));
+    if (del) {
+      fetch('files/' + privateKey, { method: 'delete' }).then(response => response.json())
+        .then((data) => {
+          alert(data.message);
+          window.location = '/';
+        })
+        .catch(e => console.log(e));
     }
 
-    
+
   }
 </script>
 
